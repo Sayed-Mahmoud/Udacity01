@@ -1,14 +1,21 @@
-import sharp from 'sharp';
+import sharp from 'sharp'
 
-// Resizing the image if width and height passed as a parameter.
-function transform(width: (undefined | string), height: (undefined | string)) {
-  if (width != undefined && height != undefined) {
-    return sharp().resize(parseInt(width), parseInt(height));
-  } else {
-    return sharp();
-  }
+// Resizing the image with width and height parameters, then saving it with a new name with size and extension.
+async function transform(
+    filename: string,
+    newfilename: string,
+    width: number,
+    height: number
+) {
+    try {
+        await sharp(filename).resize(width, height).toFile(newfilename)
+        return true
+    } catch (error) {
+        console.log(error)
+    }
+    return false
 }
 
 export default {
-  transform,
-};
+    transform,
+}
