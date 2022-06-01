@@ -1,0 +1,8 @@
+node_modules
+dist/index.js
+dist/routes/api/images.js
+dist/tests/indexSpec.js
+dist/tests/helpers/reporter.js
+dist/utilities/fileStream.js
+dist/utilities/logger.js
+dist/utilities/sharper.js
