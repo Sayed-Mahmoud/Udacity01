@@ -4,7 +4,7 @@ import sharper from '../../utilities/sharper'
 
 const routes = express.Router()
 
-routes.get('/images', async (req, res) => {
+routes.get('/images', async (req: express.Request, res: express.Response) => {
     const filename = req.query.filename as string
     if (await stream.imageExists(filename)) {
         console.log('filename: ' + filename)
@@ -14,16 +14,13 @@ routes.get('/images', async (req, res) => {
             !isNaN(parseInt(width)) &&
             parseInt(width) > 0
         ) {
-            console.log('width: ' + width)
             const height = req.query.height as string
             if (
                 height !== undefined &&
                 !isNaN(parseInt(height)) &&
                 parseInt(height) > 0
             ) {
-                console.log('height: ' + height)
                 const filenameWithSize = filename + '-' + width + '-' + height
-                console.log('filenameWithSize: ' + filenameWithSize)
 
                 if (!(await stream.imageExists(filenameWithSize))) {
                     const fullfilename = await stream.resolveImageName(filename)

@@ -6,7 +6,7 @@ async function transform(
     newfilename: string,
     width: number,
     height: number
-) {
+): Promise<boolean> {
     try {
         await sharp(filename).resize(width, height).toFile(newfilename)
         return true

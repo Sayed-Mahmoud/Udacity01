@@ -8,8 +8,7 @@ function endsWithAny(suffixes: string[], filename: string) {
 }
 
 // add the path and image extension '.jpg' if not exists.
-async function resolveImageName(filename: string) {
-    //, width: number, height: number
+async function resolveImageName(filename: string): Promise<string> {
     const imageTypes: string[] = ['.jpg', '.jpeg', '.png', '.gif']
     filename = './images/full/' + filename
     if (endsWithAny(imageTypes, filename)) {
@@ -25,13 +24,13 @@ async function resolveImageName(filename: string) {
 }
 
 // Checking if the image file has exists or not found.
-async function imageExists(filename: string) {
+async function imageExists(filename: string): Promise<boolean> {
     const imageName: string = await resolveImageName(filename)
     return await fileMan.existsSync(imageName)
 }
 
 // Getting the image buffer after path checked.
-async function getImage(filename: string) {
+async function getImage(filename: string): Promise<fileMan.ReadStream> {
     return await fileMan.createReadStream(
         await resolveImageName(filename as string)
     )
